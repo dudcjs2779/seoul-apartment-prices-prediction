@@ -68,25 +68,18 @@ filled_loc: 해당 데이터는 프로젝트 진행당시 팀원분께서 naver 
 
 ### 3-2 EDA
 
-<img src="https://github.com/dudcjs2779/seoul-apartment-prices-prediction/assets/42354230/e0400b5a-8c48-441c-964a-25f370ec63b8" alt="test_image" width="800">
+#### 결측치
+결측치는 아파트 단지정보에대한 데이터인 base_rate.csv 파일을 통해서 train 데이터와 중복되는 컬럼으로 결측치를 채워주었습니다.
 
-target값과 
+#### 상관관계
+<img src="https://github.com/dudcjs2779/seoul-apartment-prices-prediction/assets/42354230/e0400b5a-8c48-441c-964a-25f370ec63b8" alt="corr_image" width="800">
 
+위 그림은 제 모델에서 target값을 예측하는데 사용한 주요한 변수들의 피어슨 상관관계의 heatmap 입니다.<br>
+위 피쳐들에는 train, 외부데이터 및 Feature engineering 해서 생성한 파생변수까지 포함돼 있습니다.
 
-전용면적범주: 40미만-소형, 40\~60-중소형, 60~85-중형, 85\~135-중대형, 135초과-대형
+기본적으로 train 데이터의 피쳐들 중에서 target값과 상관관계가 높은 피쳐들 위주로 EDA 후 파생변수를 생성하였고 개인적으로 target 값과의 상관관계는 높지 않으나 유의미할 거라 생각되는 피쳐들 또한 실험을 통해 모델 성능과 Feature importance를 확인해가며 학습에 활용하였습니다.
 
-- 전용면적
-  - 거래가와 매우 큰 상관관계를 가짐 
-  - 중소형과 중형의 분포가 가장 많음
-- 계약년월일
-  - 최근날짜에 가까워질 수록 거래가와 매우 높은 양의 상관관계
-- 층
-  - 거래가와 약한 상관관계
-  - 전용면적이 크거나 거래가가 높은 아파트의 경우 오히려 상관관계가 낮음
-  - 중소형 면적에서 가장 높은 상관관계를 보이고 이후 중형, 중대형, 대형으로 갈수록 상관관계가 낮아짐
-  - 고층 아파트의 경우 일정 층수 이상인 경우 상관관계가 거의 없어지는 것으로 보임
-- 주차대수
-  - 거래가와 약한 상관관계가 있으며 세대당주차대수 컬럼을 만들었을때 상관관계가 0.23->0.39로 증가하였음
+자세한 EDA 내용은 predict_apart_EDA.ipynb 의 EDA 파트를 참고해주세요.
 
 
 ### 3-3 Feature engineering
@@ -119,12 +112,13 @@ target값과
 ## 4. Modeling
 
 ### 4-1 Model descrition
-
-- Catboost
-- XGBoost
 - LGBM
 
- 아파트실거래가를 예측하는 만큼 거래가에대한 이상치를 실제 이상치로 보지 않고 높은가격과 낮은 가격대를 골고루 잘 맞출 수 있는 모델을 모델링하고자 했습니다. 여러번에 실험과 테스트 결과 CV 점수와 LB 점수가 비레하지 않는다고 판단했고 저희는 실제 부동산 데이터에 가깝다고 판단하는 CV 점수에 집중해서 모델링하기로 팀내에서 결정했습니다. 따라서 팀내에서 가장 검증 데이터에 대해서 RMSE 성능이 좋았던 해당 모델을 제출하게 되었습니다.
+LGBM으로 모델링을 진행했습니다. 다수의 결측치가 포함돼 있어 nan값에 강경한 트리모델을 사용해야된다고 생각했으며 110만개 이상의 데이터를 학습하기에는 LGBM을 사용하는 게 좋을거라 생각했습니다. 만약에 옛날의 거래내역 데이터가 최근의 데이터를 예측하는데 방해가 된다면 판단한다면 예전의 데이터는 제거해서 데이터의 갯수를 줄이고 XGBoost나 Catboost를 사용하는 것도 좋을 것 같습니다.
+
+해당 모델은 기본적으로 holdout 방식으로 성능 검증을 진행합니다. 부동산 데이터도 이전 거래내역이 다음 거래내역에 영향을 미치는 일종의 시계열 데이터의 성향이 있기 때문에 검증 데이터셋을 최근 데이터로 설정할 필요가 있다고 판단했습니다.
+
+holdout 방식은 검증 데이터를 학습에 사용할 수 없지만 부동산 데이터의 특성상 최근 데이터가 굉장히 중요하기 때문에 이를 보안하기 위해 oputna로 하이퍼파라미터 튜닝후 해당 하이퍼파라미터를 그대로 사용해서 검증데이터를 포함해 모든 데이터를 학습했습니다.
 
 
 ### 4-2 Modeling Process
@@ -135,19 +129,17 @@ target값과
 ## 5. Result
 
 ### 5-1 Leader Board
-![스크린샷 2024-01-26 011358](https://github.com/UpstageAILab/upstage-ml-regression-04/assets/42354230/c47f4684-662a-4873-80cb-f3c8c8b4ac0e)
-- Rank:9
-- Score:106512.0996
+#### 대회 시스템상 이슈로 재채점이 이루어졌습니다.
+- ~Rank:9~
+- ~Score:106512.0996~
+
+![스크린샷 2024-01-29 142148](https://github.com/dudcjs2779/seoul-apartment-prices-prediction/assets/42354230/919a779f-0f2a-4e76-8235-6a70e9b9d483)
+- Rank:2
+- Score:10764.6959
 
 ### 5-2 Presentation
 
-- _Insert your presentaion file(pdf) link_
-
-## etc
-
-### Meeting Log
-
-- _Insert your meeting log link like Notion or Google Docs_
+- docs/pdf 폴더 참조
 
 ### Reference
 - 실거래지수: KOSIS국가통계포털(https://kosis.kr/statHtml/statHtml.do?orgId=408&tblId=DT_KAB_11672_S1)
