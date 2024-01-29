@@ -3,10 +3,10 @@
 
 ## Team
 
-| ![박패캠](https://avatars.githubusercontent.com/u/156163982?v=4) | ![이패캠](https://avatars.githubusercontent.com/u/156163982?v=4) | ![최패캠](https://avatars.githubusercontent.com/u/156163982?v=4) | ![김패캠](https://avatars.githubusercontent.com/u/156163982?v=4) |
-| :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: |
-|            [김영천](https://github.com/dudcjs2779)             |            [배창현](https://github.com/Bae-ChangHyun)             |            [조예람](https://github.com/huB-ram)             |            [박슬아](https://github.com/SeulaPark)             | 
-|                            팀장                             |                            팀원                             |                            팀원                             |                            팀원                             |  
+| ![박패캠](https://avatars.githubusercontent.com/u/156163982?v=4) | ![이패캠](https://avatars.githubusercontent.com/u/156163982?v=4) | ![최패캠](https://avatars.githubusercontent.com/u/156163982?v=4) | 
+| :--------------------------------------------------------------: | :--------------------------------------------------------------: | :--------------------------------------------------------------: |
+|            [김영천](https://github.com/dudcjs2779)             |            [배창현](https://github.com/Bae-ChangHyun)             |            [조예람](https://github.com/huB-ram)             |
+|                            팀장                             |                            팀원                             |                            팀원                             |
 
 ## 1. Competetion Info
 
@@ -32,8 +32,24 @@ RMSE는 예측된 값과 실제 값 간의 평균편차를 측정합니다. 아�
 ## 2. Components
 
 ### Directory
-
-- _Insert your directory structure_
+<pre>
+│  통합본.ipynb
+├─code
+│  │  gbm_final01.pkl
+│  │  lightgbm_sklearn_api.pkl
+│  │  output.csv
+│  │  predict_apart.ipynb
+│  │  predict_apart_EDA.ipynb
+│  │  
+│  └─data
+│          base_rate.csv
+│          basic_apart.parquet
+│          filled_loc.csv
+│          test.csv
+│          train.csv
+│          
+└─
+</pre>      
 
 ## 3. Data descrption
 
@@ -44,6 +60,8 @@ Train
 
 Test
 : 학습 데이터기간 이후 3개월인 2023년 7월 1일부터 2023년 9월 26일까지의 정보로 구성되어 총 9272개
+
+base_rate: 
 
 ### 3-2 EDA
 전용면적범주: 40미만-소형, 40\~60-중소형, 60~85-중형, 85\~135-중대형, 135초과-대형
