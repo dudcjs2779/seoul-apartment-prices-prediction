@@ -120,9 +120,10 @@ LGBM으로 모델링을 진행했습니다. 다수의 결측치가 포함돼 있
 
 holdout 방식은 검증 데이터를 학습에 사용할 수 없지만 부동산 데이터의 특성상 최근 데이터가 굉장히 중요하기 때문에 이를 보안하기 위해 oputna로 하이퍼파라미터 튜닝후 해당 하이퍼파라미터를 그대로 사용해서 검증데이터를 포함해 모든 데이터를 학습했습니다.
 
-#### 평가
+#### 평가(단위:만원)
 ![02](https://github.com/dudcjs2779/seoul-apartment-prices-prediction/assets/42354230/ebf81a15-1de0-4051-9fbb-80ce86d300d5)
 - RMSE: 12840.8993
+
 
 
 ### 4-2 Modeling Process
