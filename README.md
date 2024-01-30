@@ -33,21 +33,19 @@ RMSE는 예측된 값과 실제 값 간의 평균편차를 측정합니다. 아�
 
 ### Directory
 <pre>
-│  통합본.ipynb
 ├─code
 │  │  gbm_final01.pkl
 │  │  lightgbm_sklearn_api.pkl
 │  │  output.csv
 │  │  predict_apart.ipynb
 │  │  predict_apart_EDA.ipynb
-│  │  
+│  │  통합본.ipynb
 │  └─data
 │          base_rate.csv
 │          basic_apart.parquet
 │          filled_loc.csv
 │          test.csv
 │          train.csv
-│          
 └─
 </pre>      
 
