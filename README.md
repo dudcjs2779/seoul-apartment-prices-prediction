@@ -150,3 +150,6 @@ holdout 방식은 검증 데이터를 학습에 사용할 수 없지만 부동�
 - 아파트 정보: K-apt 공동주택관리정보시스템(https://www.k-apt.go.kr/board/boardList.do?board_type=03)
 - 금리: 한국은행경제통계시스템(https://ecos.bok.or.kr/#/)
 - 가구총소득: 서울열린데이터광장(https://data.seoul.go.kr/dataList/DT201013B022/S/2/datasetView.do)
+- train.csv 및 test.csv 파일의 저작권자는 "Upstage AI Lab"임을 밝힙니다.
+  - [국토교통부 실거래가](https://rt.molit.go.kr/pre.html) : 정부 3.0 및 공공데이터 개방
+  - [서울시 공공주택 아파트 정보](https://data.seoul.go.kr/dataList/OA-15818/S/1/datasetView.do) : CC BY
